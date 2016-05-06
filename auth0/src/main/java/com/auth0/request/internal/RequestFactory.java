@@ -48,7 +48,7 @@ public class RequestFactory {
         this.userAgent = userAgent;
     }
 
-    public <T> ParameterizableRequest<T> GET(HttpUrl url, OkHttpClient client, ObjectMapper mapper, Class<T> clazz) {
+    public <T> AuthorizableRequest<T> GET(HttpUrl url, OkHttpClient client, ObjectMapper mapper, Class<T> clazz) {
         final SimpleRequest<T> request = new SimpleRequest<>(url, client, mapper, "GET", clazz);
         addMetrics(request);
         return request;
@@ -91,14 +91,20 @@ public class RequestFactory {
         return request;
     }
 
-    public <T> ParameterizableRequest<T> PATCH(HttpUrl url, OkHttpClient client, ObjectMapper mapper, Class<T> clazz) {
-        final SimpleRequest<T> request = new SimpleRequest<>(url, client, mapper, "GET", clazz);
+    public <T> AuthorizableRequest<T> PATCH(HttpUrl url, OkHttpClient client, ObjectMapper mapper, Class<T> clazz) {
+        final SimpleRequest<T> request = new SimpleRequest<>(url, client, mapper, "PATCH", clazz);
         addMetrics(request);
         return request;
     }
 
     public <T> ParameterizableRequest<T> DELETE(HttpUrl url, OkHttpClient client, ObjectMapper mapper, Class<T> clazz) {
         final SimpleRequest<T> request = new SimpleRequest<>(url, client, mapper, "DELETE", clazz);
+        addMetrics(request);
+        return request;
+    }
+
+    public AuthorizableRequest<Void> DELETE(HttpUrl url, OkHttpClient client, ObjectMapper mapper) {
+        final VoidRequest request = new VoidRequest(url, client, mapper, "DELETE");
         addMetrics(request);
         return request;
     }
