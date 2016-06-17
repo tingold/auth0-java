@@ -1,14 +1,14 @@
 apply plugin: 'java'
 
 compileJava {
-    sourceCompatibility "1.7"
+    sourceCompatibility "1.8"
 }
 
 dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.4.1'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-integration:1.3'
@@ -30,14 +30,14 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
 
 artifacts {
     archives sourcesJar
-    archives javadocJar
+    //archives javadocJar
 }
 
 apply from: '../maven.gradle'
